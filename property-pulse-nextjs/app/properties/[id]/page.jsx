@@ -5,6 +5,7 @@ import PropertyHeaderImage from "@/components/PropertyHeaderImage";
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import PropertyDetails from "@/components/PropertyDetails";
+import PropertyImages from "@/components/PropertyImages";
 
 export default async function PropertyPage({ params, searchParams }) {
 	// await params and searchParams before use
@@ -30,6 +31,7 @@ export default async function PropertyPage({ params, searchParams }) {
 					<PropertyDetails property={property} />
 				</div>
 			</section>
+			<PropertyImages images={property.images} />
 		</>
 	);
 }
