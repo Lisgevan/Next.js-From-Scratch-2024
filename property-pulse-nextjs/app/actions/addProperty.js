@@ -17,7 +17,7 @@ async function addProperty(formData) {
 
 	const { userId } = sessionUser;
 
-	// Access all valus from amenities and images
+	// Access all values from amenities and images
 	const amenities = formData.getAll("amenities");
 	const images = formData.getAll("images").filter(image => image.vame !== "");
 

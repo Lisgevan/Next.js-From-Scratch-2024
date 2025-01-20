@@ -42,11 +42,11 @@ async function deleteProperty(propertyId) {
 
 	await property.deleteOne();
 
-	console.log("Revalidating path...");
-	revalidatePath("/");
-	console.log("Revalidation triggered for /");
+	// console.log("Revalidating path...");
+	// revalidatePath("/");
+	// console.log("Revalidation triggered for /");
 
-	// revalidatePath("/", "layout");
+	revalidatePath("/", "layout");
 	// console.log("Revalidating path:", revalidatePath("/"));
 }
 
