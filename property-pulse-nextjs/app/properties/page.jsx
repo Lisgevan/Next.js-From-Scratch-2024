@@ -1,3 +1,4 @@
+import Pagination from "@/components/Pagination";
 import PropertyCard from "@/components/PropertyCard";
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
@@ -5,9 +6,17 @@ import Property from "@/models/Property";
 // import properties from "@/properties.json";
 
 //using MongoDB
-export default async function PropertiesPages() {
+export default async function PropertiesPages({ searchParams }) {
+	const { page = 1, pageSize = 9 } = await searchParams;
+
 	await connectDB();
-	const properties = await Property.find({}).lean();
+
+	const skip = (page - 1) * pageSize;
+	const total = await Property.countDocuments({});
+
+	const properties = await Property.find({}).skip(skip).limit(pageSize);
+
+	const showPagination = total > pageSize;
 
 	return (
 		<section className="px-4 py-6">
@@ -21,6 +30,7 @@ export default async function PropertiesPages() {
 						))}
 					</div>
 				)}
+				{showPagination && <Pagination page={+page} pageSize={+pageSize} totalItems={total} />}
 			</div>
 		</section>
 	);
